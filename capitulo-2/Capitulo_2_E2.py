@@ -7,7 +7,7 @@ class Ambiente():
 
     def sujarSala(self):
         for i in range(self.tamanho()):
-            if rd.randint(0, 1):
+            if rd.randint(1, 10) > 6:
                 self.salas[i] = 1
 
 
@@ -27,7 +27,7 @@ class Ambiente():
     def tamanho(self):
         return len(self.salas)
 
-class Aspidador_1():
+class Aspirador_1():
 
     def __init__(self, amb: Ambiente, pos: int):
 
@@ -85,7 +85,7 @@ class Aspidador_1():
     def __removerPontuacao(self):
         self.pontuacao -= 1
 
-class Aspidador_2():
+class Aspirador_2():
 
     def __init__(self, amb: Ambiente, pos: int):
 
@@ -140,49 +140,53 @@ class Aspidador_2():
 
 class main():
 
-    # 0 == Limpo
-    # 1 == Sujo
-
-    salas1 = [[0, 0], [0, 1], [1, 0], [1, 1]]
-    salas2 = [[0, 0], [0, 1], [1, 0], [1, 1]]
-
-    salas3 = [[0, 0], [0, 1], [1, 0], [1, 1]]
-    salas4 = [[0, 0], [0, 1], [1, 0], [1, 1]]
-
-    amb1 = [Ambiente(salas1[0]), Ambiente(salas1[1]), Ambiente(salas1[2]), Ambiente(salas1[3])]
-    amb2 = [Ambiente(salas2[0]), Ambiente(salas2[1]), Ambiente(salas2[2]), Ambiente(salas2[3])]
-
-    amb3 = [Ambiente(salas3[0]), Ambiente(salas3[1]), Ambiente(salas3[2]), Ambiente(salas3[3])]
-    amb4 = [Ambiente(salas4[0]), Ambiente(salas4[1]), Ambiente(salas4[2]), Ambiente(salas4[3])]
-
-    agnt1 = [Aspidador_1(amb1[0], 0), Aspidador_1(amb1[1], 0), Aspidador_1(amb1[2], 0), Aspidador_1(amb1[3], 0),
-             Aspidador_1(amb2[0], 1), Aspidador_1(amb2[1], 1), Aspidador_1(amb2[2], 1), Aspidador_1(amb2[3], 1)]
-
-    agnt2 = [Aspidador_2(amb3[0], 0), Aspidador_2(amb3[1], 0), Aspidador_2(amb3[2], 0), Aspidador_2(amb3[3], 0),
-            Aspidador_2(amb4[0], 1), Aspidador_2(amb4[1], 1), Aspidador_2(amb4[2], 1), Aspidador_2(amb4[3], 1)]
-
     i = 0
-    val = 0
+    j = 0
     soma = 0
+    cont = 1
+    rd.seed(7)
 
-    while i < len(agnt1):
+    while i < 2:
+        j = 0
+        sala = [[0, 0], [0, 1], [1, 0], [1, 1]]
+        while j < 4:
+            amb = Ambiente(sala[j])
+            agnt = Aspirador_1(amb, i)
 
-        agnt1[i].iniciarLimpeza(1000)
-        val = agnt1[i].pontuacao
-        soma += val
-        print(f'Caso {i + 1}: \nPontuação = {val}\n')
+            print(f'Caso {cont}:\nSala: {sala[j]}\nPosição inicial do agente 1: {i}')
+
+            agnt.iniciarLimpeza(1000)
+            val = agnt.pontuacao
+            soma += val
+            print(f'Pontuação = {val}\n')
+
+            j += 1
+            cont += 1
         i += 1
 
-    print(f'Média total do agente 1: {soma / len(agnt1) :.2f}')
+    print(f'Média total do agente 1: {soma / 8 :.2f}\n\n')
 
     i = 0
+    j = 0
     soma = 0
-    while i < len(agnt2):
+    cont = 1
 
-        agnt2[i].iniciarLimpeza(1000)
-        val = agnt2[i].pontuacao
-        soma += val
-        print(f'Caso {i + 1}: \nPontuação = {val}\n')
+    while i < 2:
+        j = 0
+        sala = [[0, 0], [0, 1], [1, 0], [1, 1]]
+        while j < 4:
+            amb = Ambiente(sala[j])
+            agnt = Aspirador_2(amb, i)
+
+            print(f'Caso {cont}:\nSala: {sala[j]}\nPosição inicial do agente 2: {i}')
+
+            agnt.iniciarLimpeza(1000)
+            val = agnt.pontuacao
+            soma += val
+            print(f'Pontuação = {val}\n')
+
+            j += 1
+            cont += 1
         i += 1
 
-    print(f'Média total do agente 2: {soma / len(agnt2) :.2f}')
+    print(f'Média total do agente 2: {soma / 8 :.2f}')
