@@ -119,7 +119,6 @@ class Aspirador_2():
         elif self.ambiente.ehParede(self.posAspirador - 1) == 0 and self.ambiente.estaSujo(self.posAspirador - 1):
             self.__moverEsquerda()
 
-
     def __moverDireita(self):
         self.posAspirador += 1
         self.__removerPontuacao()
@@ -138,12 +137,11 @@ class Aspirador_2():
     def __removerPontuacao(self):
         self.pontuacao -= 1
 
-class main():
+def __executar():
 
-    i = 0
-    j = 0
-    soma = 0
+    i = soma = 0
     cont = 1
+    status = ['Limpo', 'Sujo']
     rd.seed(7)
 
     while i < 2:
@@ -153,7 +151,7 @@ class main():
             amb = Ambiente(sala[j])
             agnt = Aspirador_1(amb, i)
 
-            print(f'Caso {cont}:\nSala: {sala[j]}\nPosição inicial do agente 1: {i}')
+            print(f'Caso {cont}:\nSala: [{status[sala[j][0]]} , {status[sala[j][1]]}]\nPosição inicial do agente: {i}')
 
             agnt.iniciarLimpeza(1000)
             val = agnt.pontuacao
@@ -164,11 +162,9 @@ class main():
             cont += 1
         i += 1
 
-    print(f'Média total do agente 1: {soma / 8 :.2f}\n\n')
+    print(f'Média total do agente 1: {soma / 8 :.2f}\n\n{"-="*15}-\n')
 
-    i = 0
-    j = 0
-    soma = 0
+    i = soma = 0
     cont = 1
 
     while i < 2:
@@ -178,7 +174,7 @@ class main():
             amb = Ambiente(sala[j])
             agnt = Aspirador_2(amb, i)
 
-            print(f'Caso {cont}:\nSala: {sala[j]}\nPosição inicial do agente 2: {i}')
+            print(f'Caso {cont}:\nSala: [{status[sala[j][0]]} , {status[sala[j][1]]}]\nPosição inicial do agente: {i}')
 
             agnt.iniciarLimpeza(1000)
             val = agnt.pontuacao
@@ -190,3 +186,6 @@ class main():
         i += 1
 
     print(f'Média total do agente 2: {soma / 8 :.2f}')
+
+if __name__ == '__main__':
+    __executar()
