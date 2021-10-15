@@ -80,21 +80,20 @@ class Aspirador():
     def __adicionarPontuacao(self):
         self.pontuacao += 1
 
-class main():
-
-    i = j = soma = 0
+def __executar():
+    i = soma = 0
     cont = 1
+    status = ['Limpo', 'Sujo']
     rd.seed(7)
 
     while i < 2:
         j = 0
         sala = [[0, 0], [0, 1], [1, 0], [1, 1]]
         while j < 4:
-
             amb = Ambiente(sala[j])
             agnt = Aspirador(amb, i)
 
-            print(f'Caso {cont}:\nSala: {sala[j]}\nPosição inicial do agente: {i}')
+            print(f'Caso {cont}:\nSala: [{status[sala[j][0]]} , {status[sala[j][1]]}]\nPosição inicial do agente: {i}')
 
             agnt.iniciarLimpeza(1000)
             val = agnt.pontuacao
@@ -102,7 +101,10 @@ class main():
             print(f'Pontuação = {val}\n')
 
             j += 1
-            cont +=1
+            cont += 1
         i += 1
 
     print(f'Média total: {soma / 8 :.2f}')
+
+if __name__ == '__main__':
+    __executar()
