@@ -76,7 +76,7 @@ def bfs(noInicial):
             max_front = len(fronteira)
 
 def dfs(noInicial):
-    visitados, fronteira = set(), list([noInicial])
+    visitados, fronteira = set(), deque([noInicial])
     max_front = 0
 
     while fronteira:
@@ -98,7 +98,7 @@ def dfs(noInicial):
 def idfs(noInicial):
      max_alt = 1
      while True:
-        visitados, fronteira = set(), list([noInicial])
+        visitados, fronteira = set(), deque([noInicial])
         max_front = 0
         while fronteira:
             noAtual = fronteira.pop()
@@ -151,7 +151,7 @@ def executar():
     if metodo == 'bfs':
         result = bfs(puzzle)
     elif metodo == 'dfs':
-        result = bfs(puzzle)
+        result = dfs(puzzle)
     elif metodo == 'idfs':
         result = idfs(puzzle)
     else:
